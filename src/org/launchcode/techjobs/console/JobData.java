@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by LaunchCode
@@ -96,16 +97,13 @@ public class JobData {
 
             for (Map.Entry<String, String> entry : row.entrySet()){
 
-                if (entry.getValue().contains(searchTerm)) {
+                if (Pattern.compile(Pattern.quote(searchTerm), Pattern.CASE_INSENSITIVE).matcher(entry.getValue()).find()){
+                // if (entry.getValue().contains(searchTerm)) {
                     jobs.add(row);
                     break;
                 }
-//                else {
-//                    jobs.add("k", "v");
-//                }
             }
         }
-
         return jobs;
     }
 
